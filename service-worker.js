@@ -2,7 +2,7 @@
    타이핑 마스터 — 서비스 워커 (오프라인 실행)
    https 또는 localhost 에서만 등록됩니다.
    ============================================================ */
-const CACHE = 'typing-master-v1.0.1';
+const CACHE = 'typing-master-v1.0.2';
 
 const ASSETS = [
   './',

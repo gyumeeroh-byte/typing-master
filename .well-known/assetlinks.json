@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.jia.typingmaster",
+        "sha256_cert_fingerprints": ["E3:0C:F7:42:B6:0B:C2:58:10:EE:CC:D8:F6:A4:69:08:E3:55:44:19:7A:B0:B0:FF:79:4C:5C:0A:82:7F:83:13"]
+      }
+    }]
