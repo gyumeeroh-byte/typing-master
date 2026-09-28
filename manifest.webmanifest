@@ -1,0 +1,52 @@
+{
+  "name": "타이핑 마스터 — 영어 자판 연습 게임",
+  "short_name": "타이핑 마스터",
+  "description": "단어를 따라 쓰며 레벨을 올리는 영어 타이핑 연습 게임. 컴퓨터 초보자와 영어 입문자를 위한 5가지 모드, 418개 단어.",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "lang": "ko",
+  "dir": "ltr",
+  "categories": ["education", "games", "productivity"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    {
+      "src": "icons/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "따라쓰기 연습 화면 — 색깔 자판으로 손가락 위치를 익혀요"
+    },
+    {
+      "src": "icons/screenshot-wide.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "타이핑 마스터 홈 화면"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "따라쓰기 시작",
+      "short_name": "따라쓰기",
+      "url": "./index.html?mode=follow",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "낙하 단어 게임",
+      "short_name": "낙하 단어",
+      "url": "./index.html?mode=fall",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
+}

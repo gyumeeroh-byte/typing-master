@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no, interactive-widget=resizes-content">
+<title>타이핑 마스터 — 영어 자판 연습 게임</title>
+<meta name="description" content="영어 자판 연습 게임 — 단어를 따라 쓰며 레벨을 올리는 타이핑 연습. 컴퓨터 초보자와 영어 입문자를 위한 무료 게임.">
+<meta name="theme-color" content="#0b1020">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="타이핑 마스터">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="bg-orbs" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<div class="app">
+  <div class="topbar">
+    <button class="brand" data-go="home">⌨️ <span>타이핑 마스터</span></button>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="btn-sound" title="소리 켜기/끄기">🔊</button>
+    </div>
+  </div>
+
+  <!-- ================= HOME ================= -->
+  <section class="screen active" id="screen-home">
+    <h1 class="hero-title">영어 자판 연습 게임</h1>
+    <p class="hero-sub">단어를 따라 쓰면서 레벨을 올려 보세요.<br>컴퓨터가 처음이어도, 영어가 처음이어도 괜찮아요!</p>
+
+    <div class="menu-grid">
+      <button class="menu-card primary" data-go="setup">
+        <span class="mi">🎮</span><b>게임 시작</b><small>분류와 모드를 골라 연습해요</small>
+      </button>
+      <button class="menu-card" data-go="words">
+        <span class="mi">📚</span><b>단어 살펴보기</b><small>분류별 단어 · 뜻 · 내 단어 추가</small>
+      </button>
+      <button class="menu-card" data-go="records">
+        <span class="mi">🏆</span><b>내 기록</b><small>최고 점수와 별을 확인해요</small>
+      </button>
+      <button class="menu-card" data-go="settings">
+        <span class="mi">⚙️</span><b>설정</b><small>소리 · 키보드 표시 · 대소문자</small>
+      </button>
+    </div>
+
+    <div class="tip-box">
+      💡 <b>처음이신가요?</b> 양손 검지를 <b>F</b>와 <b>J</b>에 올리고(볼록한 점이 있어요),
+      화면 아래 <b>색깔 키보드</b>를 보며 따라 쳐 보세요. 색은 “어느 손가락으로 누르는지”를 알려줍니다.
+    </div>
+
+    <div class="install-area">
+      <button class="btn primary install-btn" id="btn-install">📲 홈 화면에 앱으로 설치</button>
+      <div class="install-hint" id="install-hint"></div>
+    </div>
+  </section>
+
+  <!-- ================= SETUP ================= -->
+  <section class="screen" id="screen-setup">
+    <div class="screen-head">
+      <button class="back-btn" data-go="home">←</button>
+      <h2>연습 설정</h2>
+    </div>
+
+    <h3 class="sec-title">1. 단어 분류 <small>여러 개 고를 수 있어요</small></h3>
+    <div class="chip-grid" id="category-grid"></div>
+
+    <h3 class="sec-title">2. 게임 모드</h3>
+    <div class="mode-grid" id="mode-grid"></div>
+
+    <h3 class="sec-title">3. 난이도</h3>
+    <div class="diff-row" id="diff-row">
+      <button data-diff="easy">🌱 쉬움<small>천천히, 길게</small></button>
+      <button data-diff="normal" class="on">🙂 보통<small>기본</small></button>
+      <button data-diff="hard">🔥 어려움<small>빠르게, 짧게</small></button>
+    </div>
+
+    <div class="setup-footer">
+      <div class="setup-info" id="setup-info"></div>
+      <button class="btn-start" id="btn-start">시작하기 ▶</button>
+    </div>
+  </section>
+
+  <!-- ================= PLAY ================= -->
+  <section class="screen" id="screen-play">
+    <div class="play-hud">
+      <div class="hud-item"><span>레벨</span><b id="hud-level">1</b></div>
+      <div class="hud-item"><span>점수</span><b id="hud-score">0</b></div>
+      <div class="hud-item"><span>콤보</span><b id="hud-combo">0</b></div>
+      <div class="hud-item"><span>정확도</span><b id="hud-acc">100%</b></div>
+      <div class="hud-item"><span>속도</span><b id="hud-wpm">0</b></div>
+      <div class="hud-item" id="hud-extra-wrap"><span id="hud-extra-label">시간</span><b id="hud-extra">60</b></div>
+      <button class="icon-btn" id="btn-kb" title="화면 자판 보기/숨기기">⌨️</button>
+      <button class="icon-btn" id="btn-quit" title="그만하기">✕</button>
+    </div>
+
+    <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
+
+    <div class="stage" id="stage">
+      <div class="target" id="target"></div>
+      <div class="meaning" id="meaning"></div>
+      <div class="fall-area" id="fall-area"></div>
+      <div class="type-echo" id="type-echo"></div>
+      <div class="next-hint" id="next-hint"></div>
+      <div class="stage-msg" id="stage-msg"></div>
+    </div>
+
+    <input id="typing-input" type="text" inputmode="text" enterkeyhint="done"
+           placeholder="여기를 눌러 입력하세요"
+           autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+           aria-label="타이핑 입력">
+
+    <div class="kb-wrap" id="kb-wrap"><div class="keyboard" id="keyboard"></div></div>
+
+    <div class="focus-veil" id="focus-veil">
+      <div class="veil-box">
+        <div id="veil-title">클릭하면 계속합니다</div>
+        <small id="veil-sub">Esc 키를 누르면 잠시 멈출 수 있어요</small>
+        <div class="veil-btns">
+          <button class="btn ghost" id="veil-quit">그만하기</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESULT ================= -->
+  <section class="screen" id="screen-result">
+    <div class="result-card">
+      <div class="result-emoji" id="result-emoji">🎉</div>
+      <h2 id="result-title">잘했어요!</h2>
+      <div class="stars" id="result-stars">★★★</div>
+      <div class="result-grid" id="result-grid"></div>
+      <div class="result-msg" id="result-msg"></div>
+      <div class="result-btns">
+        <button class="btn primary" id="btn-retry">다시 하기</button>
+        <button class="btn" data-go="setup">다른 게임</button>
+        <button class="btn ghost" data-go="home">홈으로</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WORDS ================= -->
+  <section class="screen" id="screen-words">
+    <div class="screen-head">
+      <button class="back-btn" data-go="home">←</button>
+      <h2>단어 살펴보기</h2>
+    </div>
+    <div class="chip-grid small" id="wordcat-grid"></div>
+    <div class="word-list" id="word-list"></div>
+
+    <h3 class="sec-title">내 단어 추가 <small>한 줄에 “단어|뜻” 형식으로</small></h3>
+    <textarea id="custom-input" rows="5" placeholder="apple|사과&#10;keyboard|키보드&#10;practice makes perfect|연습이 완벽을 만든다"></textarea>
+    <div class="row-btns">
+      <button class="btn primary" id="btn-custom-save">저장하기</button>
+      <button class="btn ghost" id="btn-custom-clear">내 단어 모두 지우기</button>
+    </div>
+  </section>
+
+  <!-- ================= RECORDS ================= -->
+  <section class="screen" id="screen-records">
+    <div class="screen-head">
+      <button class="back-btn" data-go="home">←</button>
+      <h2>내 기록</h2>
+    </div>
+    <div class="record-list" id="record-list"></div>
+    <div class="row-btns">
+      <button class="btn ghost" id="btn-record-clear">기록 모두 지우기</button>
+    </div>
+  </section>
+
+  <!-- ================= SETTINGS ================= -->
+  <section class="screen" id="screen-settings">
+    <div class="screen-head">
+      <button class="back-btn" data-go="home">←</button>
+      <h2>설정</h2>
+    </div>
+    <div class="setting-list" id="setting-list"></div>
+    <p class="muted-note">설정과 기록은 이 컴퓨터의 브라우저에만 저장됩니다. (개인정보 전송 없음)</p>
+  </section>
+</div>
+
+<script src="js/words.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/keyboard.js"></script>
+<script src="js/game.js"></script>
+<script>
+/* 오프라인 실행용 서비스 워커 (https 또는 localhost 에서만 동작) */
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('service-worker.js').catch(function () {});
+  });
+}
+</script>
+</body>
+</html>
